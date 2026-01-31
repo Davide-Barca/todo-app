@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 
-import googleIcon from "@/googleIcon.svg";
+import googleIcon from "@/media/googleIcon.svg";
 
 // Main Component
 export default function GoogleSignInButton() {
