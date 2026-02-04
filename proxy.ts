@@ -1,4 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "./lib/auth";
+import { headers } from "next/headers";
+
+function redirectToSignIn(req: NextRequest) {
+  const signInUrl = new URL("/signin", req.url);
+  signInUrl.searchParams.set("callbackUrl", req.nextUrl.pathname + req.nextUrl.search);
+
+  return NextResponse.redirect(signInUrl);
+}
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -17,17 +26,16 @@ export async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Define redirect URL
-  const signInURL = new URL("/signin", req.url);
-  signInURL.searchParams.set("callbackUrl", req.nextUrl.pathname + req.nextUrl.search);
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-  // Verify session by calling the BetterAuth session endpoint on the server.
+  if (!session) return redirectToSignIn(req);
 
-  // Redirect to /signin page
-  return NextResponse.redirect(signInURL);
+  return NextResponse.next();
 }
 
 // Protect everything under the root page
 export const config = {
-  matcher: ["/", "/component-example"],
+  matcher: ["/", "/dio-poveretto"],
 };

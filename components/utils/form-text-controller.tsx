@@ -20,6 +20,7 @@ type ControllerProps<TFormValues extends FieldValues> = {
   placeholder?: string;
   name: Path<TFormValues>;
   type?: HTMLInputTypeAttribute;
+  required?: boolean;
   form: UseFormReturn<TFormValues>;
 };
 
@@ -30,9 +31,16 @@ export default function TextController<TFormValues extends FieldValues>({
   placeholder,
   name,
   type = "text",
+  required,
   form,
 }: ControllerProps<TFormValues>) {
   const id = `form-${name}`;
+
+  // Define required dot component
+  let requiredDot: ReactNode = null;
+  if (required) {
+    requiredDot = <span className="text-red-500">*</span>;
+  }
 
   // Define label link component
   let labelLink: ReactNode = null;
@@ -51,7 +59,10 @@ export default function TextController<TFormValues extends FieldValues>({
       render={({ field, fieldState }) => (
         <div suppressHydrationWarning>
           <div className="flex items-center">
-            <Label htmlFor={id}>{label}</Label>
+            <Label htmlFor={id}>
+              {label}
+              {requiredDot}
+            </Label>
             {labelLink}
           </div>
           <Input {...field} id={id} type={type} placeholder={placeholder} className="mt-2" aria-invalid={fieldState.invalid} />

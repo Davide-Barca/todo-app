@@ -16,7 +16,7 @@ Se deve essere rigenerato il client
 npx prisma generate
 ```
 
-Dopo un *git pull* con nuove migrations
+Dopo un *git pull* con nuove migrations / rigenerare file .db
 ```
 npm install
 npx prisma migrate dev
