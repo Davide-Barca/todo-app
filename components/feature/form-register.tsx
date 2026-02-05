@@ -9,6 +9,7 @@ import { TransitionStartFunction } from "react";
 // Components
 import TextController from "../utils/form-text-controller";
 import { emailSignUp } from "@/lib/auth/email-signup";
+import { showErrorToast } from "@/lib/toast";
 
 // Types
 
@@ -54,7 +55,7 @@ export default function RegisterForm({ formId, transitionFn }: LoginFormProps) {
         password: data.password,
       });
 
-      if (!response) alert("Errore");
+      if (!response.ok) return showErrorToast("Registration Error!", response.message)
 
       router.push(callbackURL || "/");
     });
