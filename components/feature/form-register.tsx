@@ -4,6 +4,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
+import { TransitionStartFunction } from "react";
 
 // Components
 import TextController from "../utils/form-text-controller";
@@ -14,6 +15,7 @@ import { emailSignUp } from "@/lib/auth/email-signup";
 // Custom Types
 type LoginFormProps = {
   formId?: string;
+  transitionFn: TransitionStartFunction;
 };
 
 // Form schema
@@ -26,7 +28,7 @@ const formSchema = z.object({
 });
 
 // Main Component
-export default function RegisterForm({ formId }: LoginFormProps) {
+export default function RegisterForm({ formId, transitionFn }: LoginFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackURL = searchParams.get("callbackUrl") || "/";
@@ -45,15 +47,17 @@ export default function RegisterForm({ formId }: LoginFormProps) {
 
   // Define onSubit function
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const response = await emailSignUp({
-      name: `${data.fName} ${data.lName}`,
-      email: data.email,
-      password: data.password,
+    transitionFn(async () => {
+      const response = await emailSignUp({
+        name: `${data.fName} ${data.lName}`,
+        email: data.email,
+        password: data.password,
+      });
+
+      if (!response) alert("Errore");
+
+      router.push(callbackURL || "/");
     });
-
-    if (!response) alert("Errore");
-
-    router.push(callbackURL || "/");
   }
 
   // Build component

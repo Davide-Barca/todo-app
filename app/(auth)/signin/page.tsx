@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import { useTransition } from "react";
 import Link from "next/link";
 
 // Components
@@ -6,9 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import LoginForm from "@/components/feature/form-login";
 import GoogleSignInButton from "@/components/btn-google-signin";
+import { Spinner } from "@/components/ui/spinner";
 
 // Main Component
 export default function SignInPage() {
+  const [isLoading, startLoading] = useTransition();
+
   return (
     <div className="w-full flex justify-center pt-10">
       <Card className="w-full max-w-sm" suppressHydrationWarning>
@@ -22,13 +27,14 @@ export default function SignInPage() {
           </CardAction>
         </CardHeader>
         <CardContent>
-          <LoginForm />
+          <LoginForm transitionFn={startLoading} />
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" form="login-form" className="w-full">
+          <Button type="submit" form="login-form" disabled={isLoading} className="w-full">
+            {isLoading && <Spinner />}
             Login
           </Button>
-          <GoogleSignInButton />
+          <GoogleSignInButton disabled={isLoading} />
         </CardFooter>
       </Card>
     </div>
