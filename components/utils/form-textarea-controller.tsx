@@ -2,9 +2,9 @@ import Link from "next/link";
 
 // Components
 import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import { FieldError } from "../ui/field";
 import { Controller } from "react-hook-form";
+import { Textarea } from "../ui/textarea";
 
 // Types
 import { HTMLInputTypeAttribute, ReactNode } from "react";
@@ -19,18 +19,16 @@ type ControllerProps<TFormValues extends FieldValues> = {
   };
   placeholder?: string;
   name: Path<TFormValues>;
-  type?: HTMLInputTypeAttribute;
   required?: boolean;
   form: UseFormReturn<TFormValues>;
 };
 
 // Main Component
-export default function TextController<TFormValues extends FieldValues>({
+export default function TextareaController<TFormValues extends FieldValues>({
   label,
   link,
   placeholder,
   name,
-  type = "text",
   required,
   form,
 }: ControllerProps<TFormValues>) {
@@ -65,7 +63,7 @@ export default function TextController<TFormValues extends FieldValues>({
             </Label>
             {labelLink}
           </div>
-          <Input {...field} id={id} type={type} placeholder={placeholder} className="mt-2" aria-invalid={fieldState.invalid} />
+          <Textarea {...field} id={id} placeholder={placeholder} className="mt-2 min-h-32 max-h-100" aria-invalid={fieldState.invalid} />
           {fieldState.invalid && <FieldError errors={[fieldState.error]} className="text-xs mt-2" />}
         </div>
       )}

@@ -9,7 +9,7 @@ export default function PlatformLayout({
   return (
     <SidebarProvider>
       <MainSidebar />
-      <main className="py-2 px-10">{children}</main>
+      <main className="w-full h-screen py-2 px-10">{children}</main>
     </SidebarProvider>
   );
 }
