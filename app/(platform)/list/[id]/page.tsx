@@ -1,6 +1,8 @@
+// Components
 import { Button } from "@/components/ui/button";
-import { Card, CardTitle } from "@/components/ui/card";
+import { CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldTitle } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -81,17 +83,19 @@ export default async function ListPage({ params }: PageProps) {
             <FieldGroup className="gap-3">
               {list.tasks.map((task) => {
                 return (
-                  <FieldLabel>
-                    <Field orientation={"horizontalCenter"} className="">
-                      <Checkbox className="size-5" id={task.id} />
-                      <FieldContent className="group-has-data-checked/field:*:line-through group-has-data-checked/field:*:opacity-50">
-                        <FieldTitle>{task.title}</FieldTitle>
-                        <FieldDescription>{task.description}</FieldDescription>
-                      </FieldContent>
-                      <Button variant={"secondary"} size={"sm"}>
-                        Open
-                      </Button>
-                    </Field>
+                  <FieldLabel asChild>
+                    <div>
+                      <Field orientation={"horizontalCenter"}>
+                        <Checkbox className="size-5 cursor-pointer" id={task.id} defaultChecked={task.isChecked} />
+                        <FieldContent className="peer-has-data-checked:*:line-through peer-has-data-checked:*:opacity-50">
+                          <FieldTitle>{task.title}</FieldTitle>
+                          <FieldDescription>{task.description}</FieldDescription>
+                        </FieldContent>
+                        <Button variant={"outline"} size={"sm"}>
+                          Open
+                        </Button>
+                      </Field>
+                    </div>
                   </FieldLabel>
                 );
               })}
