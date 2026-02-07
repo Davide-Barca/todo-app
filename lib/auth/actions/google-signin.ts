@@ -1,4 +1,4 @@
-import { authClient } from "../auth-client";
+import { authClient } from "../client";
 
 export async function GoogleSignIn(callbackURL?: string) {
   await authClient.signIn.social({

@@ -8,7 +8,7 @@ import { TransitionStartFunction } from "react";
 
 // Components
 import TextController from "../utils/form-text-controller";
-import { emailSignUp } from "@/lib/auth/email-signup";
+import { emailSignUp } from "@/lib/auth/actions/email-signup";
 import { showErrorToast } from "@/lib/toast";
 
 // Types
