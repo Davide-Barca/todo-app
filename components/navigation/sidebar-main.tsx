@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -15,12 +15,11 @@ import {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
+  SidebarMenuSkeleton,
 } from "../ui/sidebar";
-import { Ellipsis, Pin, Plus, Settings, User } from "lucide-react";
+import { Ellipsis, LogOut, Pin, Plus, Settings, User } from "lucide-react";
 import ChangeThemeIcon from "../utils/change-theme";
 import Link from "next/link";
-import { toast } from "sonner";
 
 const lists = [
   {
@@ -76,6 +75,17 @@ const lists = [
 ];
 
 export default function MainSidebar() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // Simulate list loading
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <Sidebar side="left" collapsible="icon">
       {/* Header */}
@@ -90,8 +100,8 @@ export default function MainSidebar() {
           <SidebarGroupLabel>General</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <ListItem href="/profile" name="Profile" icon={<User />} noActions />
-              <ListItem href="/settings" name="Settings" icon={<Settings />} noActions />
+              <ListItem href="/profile" name="Profile" icon={<User />} noMenu />
+              <ListItem href="/settings" name="Settings" icon={<Settings />} noMenu />
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -111,24 +121,44 @@ export default function MainSidebar() {
         {/* List Group */}
         <SidebarGroup>
           <SidebarGroupLabel>Todo Lists</SidebarGroupLabel>
-          <SidebarGroupAction onClick={() => toast("Add Project")}>
-            <Plus /> <span className="sr-only">Add Project</span>
+          <SidebarGroupAction asChild>
+            <Link href={"/?create=list"}>
+              <Plus /> <span className="sr-only">Add List</span>
+            </Link>
           </SidebarGroupAction>
 
           {/* Lists */}
           <SidebarGroupContent>
             {/* Menu */}
             <SidebarMenu>
-              {lists.map(({ id, name, activityCount }) => (
-                <ListItem key={id} href={`/list/${id}`} name={name} activityCount={activityCount} />
-              ))}
+              {isLoading && (
+                <>
+                  <SidebarMenuSkeleton />
+                  <SidebarMenuSkeleton />
+                  <SidebarMenuSkeleton />
+                  <SidebarMenuSkeleton />
+                  <SidebarMenuSkeleton />
+                  <SidebarMenuSkeleton />
+                </>
+              )}
+              {!isLoading &&
+                lists.map(({ id, name, activityCount }) => <ListItem key={id} href={`/list/${id}`} name={name} activityCount={activityCount} />)}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
       {/* Footer */}
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter>
+        <SidebarGroup>
+          <SidebarGroupLabel>Other</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <ListItem href="/auth/signout" name="Disconnect" icon={<LogOut />} noMenu />
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarFooter>
     </Sidebar>
   );
 }
@@ -139,12 +169,12 @@ type ListItemProps = {
   name: string;
   activityCount?: number;
   icon?: ReactNode;
-  noActions?: boolean;
+  noMenu?: boolean;
 };
 
-function ListItem({ href, name, activityCount, icon, noActions = false }: ListItemProps) {
-  let hasBadge = activityCount && activityCount > 0 ? true : false
-  
+function ListItem({ href, name, activityCount, icon, noMenu = false }: ListItemProps) {
+  let hasBadge = !!activityCount && activityCount > 0;
+
   return (
     <SidebarMenuItem className="group/menu-item">
       <SidebarMenuButton asChild>
@@ -156,7 +186,7 @@ function ListItem({ href, name, activityCount, icon, noActions = false }: ListIt
 
       {hasBadge && <SidebarMenuBadge className="group-hover/menu-item:hidden">{activityCount}</SidebarMenuBadge>}
 
-      {!noActions && (
+      {!noMenu && (
         <SidebarMenuAction className="hidden group-hover/menu-item:flex">
           <Ellipsis />
         </SidebarMenuAction>
