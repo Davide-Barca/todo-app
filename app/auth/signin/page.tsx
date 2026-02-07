@@ -6,33 +6,35 @@ import Link from "next/link";
 // Components
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import RegisterForm from "@/components/feature/form-register";
+import LoginForm from "@/components/feature/form-login";
+import GoogleSignInButton from "@/components/btn-google-signin";
 import { Spinner } from "@/components/ui/spinner";
 
 // Main Component
-export default function RegisterPage() {
+export default function SignInPage() {
   const [isLoading, startLoading] = useTransition();
 
   return (
     <div className="w-full flex justify-center pt-10">
       <Card className="w-full max-w-sm" suppressHydrationWarning>
         <CardHeader>
-          <CardTitle>Register new account</CardTitle>
-          <CardDescription>Enter your data below to register new account</CardDescription>
+          <CardTitle>Login to your account</CardTitle>
+          <CardDescription>Enter your username below to login to your activity</CardDescription>
           <CardAction>
             <Button variant={"link"} asChild>
-              <Link href={"/signin"}>Sign In</Link>
+              <Link href={"/auth/register"}>Register</Link>
             </Button>
           </CardAction>
         </CardHeader>
         <CardContent>
-          <RegisterForm transitionFn={startLoading} />
+          <LoginForm transitionFn={startLoading} />
         </CardContent>
         <CardFooter className="flex-col gap-2">
-          <Button type="submit" form="register-form" disabled={isLoading} className="w-full">
+          <Button type="submit" form="login-form" disabled={isLoading} className="w-full">
             {isLoading && <Spinner />}
-            Register
+            Login
           </Button>
+          <GoogleSignInButton disabled={isLoading} />
         </CardFooter>
       </Card>
     </div>

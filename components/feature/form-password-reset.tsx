@@ -3,13 +3,12 @@
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // Actions
 
 // Components
 import TextController from "../utils/form-text-controller";
-import { toast } from "sonner";
 import { showInfoToast } from "@/lib/toast";
 
 // Types
@@ -41,7 +40,7 @@ export default function PasswordResetForm({ formId }: LoginFormProps) {
     const description = `Reset link has been sent to ${data.email}`;
     showInfoToast("Check your email!", description);
 
-    router.push("/signin");
+    router.push("/auth/signin");
   }
 
   // Build component

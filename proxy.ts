@@ -3,7 +3,7 @@ import { auth } from "./lib/auth";
 import { headers } from "next/headers";
 
 function redirectToSignIn(req: NextRequest) {
-  const signInUrl = new URL("/signin", req.url);
+  const signInUrl = new URL("/auth/signin", req.url);
   signInUrl.searchParams.set("callbackUrl", req.nextUrl.pathname + req.nextUrl.search);
 
   return NextResponse.redirect(signInUrl);
@@ -16,13 +16,11 @@ export async function proxy(req: NextRequest) {
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api/auth") ||
-    pathname.startsWith("/api-health") ||
+    pathname.startsWith("/api/health-check") ||
     pathname.startsWith("/favicon.ico") ||
-    pathname.startsWith("/signin") ||
-    pathname.startsWith("/register") ||
+    pathname.startsWith("/auth") ||
     pathname.startsWith("/public")
   ) {
-    console.log("proxy: Public path, allowing:", pathname);
     return NextResponse.next();
   }
 
@@ -37,5 +35,5 @@ export async function proxy(req: NextRequest) {
 
 // Protect everything under the root page
 export const config = {
-  matcher: ["/", "/dio-poveretto"],
+  matcher: ["/:path*"],
 };

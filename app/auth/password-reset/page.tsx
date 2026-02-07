@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 // Main Component
 export default function PasswordResetPage() {
   
-  
   return (
     <div className="w-full flex justify-center pt-10">
       <Card className="w-full max-w-sm" suppressHydrationWarning>

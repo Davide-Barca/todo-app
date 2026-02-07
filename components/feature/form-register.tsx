@@ -57,7 +57,7 @@ export default function RegisterForm({ formId, transitionFn }: LoginFormProps) {
 
       if (!response.ok) return showErrorToast("Registration Error!", response.message)
 
-      router.push(callbackURL || "/");
+      router.push(callbackURL);
     });
   }
 

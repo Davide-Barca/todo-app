@@ -50,9 +50,9 @@ export default function LoginForm({ formId, transitionFn }: LoginFormProps) {
         password: data.password,
       });
 
-      if (!response.ok) return showErrorToast("Login Error!", response.message)
+      if (!response.ok) return showErrorToast("Login Error!", response.message);
 
-      router.push(callbackURL || "/");
+      router.push(callbackURL);
     });
   }
 
@@ -67,7 +67,7 @@ export default function LoginForm({ formId, transitionFn }: LoginFormProps) {
           name="password"
           form={form}
           placeholder="Password"
-          link={{ value: "Forgot you password?", href: "/password-reset" }}
+          link={{ value: "Forgot you password?", href: "/auth/password-reset" }}
         />
       </div>
     </form>
