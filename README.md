@@ -26,7 +26,7 @@ Create SQL tables:
 
 ```
 cd migrations/app
-node 001_init.sql
+node run-sql.js
 ```
 
 Create .env file:
