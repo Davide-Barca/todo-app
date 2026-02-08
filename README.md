@@ -21,3 +21,13 @@ npx @better-auth/cli generate
 # This command creates the required tables directly in the database.
 npx @better-auth/cli migrate
 ```
+
+Create .env file:
+
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+DATABASE_URL="file:./dev.db"
+```
