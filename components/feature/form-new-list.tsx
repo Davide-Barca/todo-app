@@ -9,6 +9,7 @@ import { TransitionStartFunction } from "react";
 // Components
 import TextController from "../utils/form-text-controller";
 import { showErrorToast } from "@/lib/toast";
+import { addUserList } from "@/actions/post/list";
 
 // Types
 
@@ -40,17 +41,11 @@ export default function ListForm({ formId, transitionFn }: LoginFormProps) {
   // Define onSubit function
   async function onSubmit(data: z.infer<typeof formSchema>) {
     transitionFn(async () => {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 5000);
-      });
+      const response = await addUserList(data.name);
 
-      const response = { ok: false, message: "" };
+      if (!response) return showErrorToast("List Registration Failed!");
 
-      if (!response.ok) return showErrorToast("List Registration Failed!", response.message);
-
-      router.push(callbackURL || "/");
+      router.push(`/list/${response.id}`);
     });
   }
 
