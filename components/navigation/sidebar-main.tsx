@@ -17,7 +17,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSkeleton,
 } from "../ui/sidebar";
-import { Ellipsis, LogOut, Pin, Plus, Settings, User } from "lucide-react";
+import { CirclePlus, Ellipsis, LogOut, Pin, Plus, Settings, SquarePlus, User } from "lucide-react";
 import ChangeThemeIcon from "../utils/change-theme";
 import Link from "next/link";
 
@@ -100,6 +100,7 @@ export default function MainSidebar() {
           <SidebarGroupLabel>General</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              <ListItem href="/?create=task" name="New Task" icon={<SquarePlus />} noMenu />
               <ListItem href="/profile" name="Profile" icon={<User />} noMenu />
               <ListItem href="/settings" name="Settings" icon={<Settings />} noMenu />
             </SidebarMenu>
