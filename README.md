@@ -22,6 +22,13 @@ npx @better-auth/cli generate
 npx @better-auth/cli migrate
 ```
 
+Create SQL tables:
+
+```
+cd migrations/app
+node 001_init.sql
+```
+
 Create .env file:
 
 ```
@@ -29,5 +36,5 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=http://localhost:3000
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="dev.db"
 ```
