@@ -56,7 +56,7 @@ export default function ListForm({ formId, transitionFn }: LoginFormProps) {
 
   // Build component
   return (
-    <form id={formId || "list-form"} onSubmit={form.handleSubmit(onSubmit)} suppressHydrationWarning>
+    <form id={formId || "new-list-form"} onSubmit={form.handleSubmit(onSubmit)} suppressHydrationWarning>
       <div className="flex flex-col gap-4">
         <TextController label={"Name"} name="name" form={form} placeholder="Routine activities" required />
       </div>

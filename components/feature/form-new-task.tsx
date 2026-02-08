@@ -17,7 +17,6 @@ import TextareaController from "@/components/utils/form-textarea-controller";
 type LoginFormProps = {
   formId?: string;
   transitionFn: TransitionStartFunction;
-  defaultValues?: z.infer<typeof formSchema>;
 };
 
 // Form schema
@@ -27,7 +26,7 @@ const formSchema = z.object({
 });
 
 // Main Component
-export default function TaskForm({ formId, transitionFn, defaultValues }: LoginFormProps) {
+export default function TaskNewForm({ formId, transitionFn }: LoginFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackURL = searchParams.get("callbackUrl") || "/";
@@ -35,7 +34,7 @@ export default function TaskForm({ formId, transitionFn, defaultValues }: LoginF
   // Define useForm form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues || {
+    defaultValues: {
       title: "",
       description: "",
     },
@@ -60,7 +59,7 @@ export default function TaskForm({ formId, transitionFn, defaultValues }: LoginF
 
   // Build component
   return (
-    <form id={formId || "task-form"} onSubmit={form.handleSubmit(onSubmit)} suppressHydrationWarning>
+    <form id={formId || "new-task-form"} onSubmit={form.handleSubmit(onSubmit)} suppressHydrationWarning>
       <div className="flex flex-col gap-4">
         <TextController label={"Title"} name="title" form={form} placeholder="Go to the grocery shop" required />
         <TextareaController label={"Description"} name="description" form={form} placeholder="Type here..." />

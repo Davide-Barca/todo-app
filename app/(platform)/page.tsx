@@ -5,10 +5,18 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 // Components
-import ListForm from "@/components/feature/form-list";
-import TaskForm from "@/components/feature/form-task";
+import NewListForm from "@/components/feature/form-new-list";
+import NewTaskForm from "@/components/feature/form-new-task";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 
 // Custom Types
@@ -38,11 +46,11 @@ export default function Page() {
           </CardAction>
         </CardHeader>
         <CardContent>
-          {create === "task" && <TaskForm transitionFn={startLoading} />}
-          {create === "list" && <ListForm transitionFn={startLoading} />}
+          {create === "task" && <NewTaskForm transitionFn={startLoading} />}
+          {create === "list" && <NewListForm transitionFn={startLoading} />}
         </CardContent>
         <CardFooter className="grid">
-          <Button type="submit" form={`${create}-form`} disabled={isLoading}>
+          <Button type="submit" form={`new-${create}-form`} disabled={isLoading}>
             {isLoading && <Spinner />}
             Create {create}
           </Button>

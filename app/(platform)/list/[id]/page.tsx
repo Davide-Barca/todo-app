@@ -1,8 +1,8 @@
 // Components
+import OpenTask from "@/components/feature/open-task";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldTitle } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -60,7 +60,7 @@ export default async function ListPage({ params }: PageProps) {
 
   return (
     <div className="size-full flex justify-center">
-      <div className="w-1/2 h-full flex flex-col p-5">
+      <div className="w-3/4 2xl:w-1/2 h-full flex flex-col p-5">
         {/* Header */}
         <div className="space-y-1 h-fit">
           <div className="flex items-center justify-between">
@@ -83,7 +83,7 @@ export default async function ListPage({ params }: PageProps) {
             <FieldGroup className="gap-3">
               {list.tasks.map((task) => {
                 return (
-                  <FieldLabel asChild>
+                  <FieldLabel key={task.id} asChild>
                     <div>
                       <Field orientation={"horizontalCenter"}>
                         <Checkbox className="size-5 cursor-pointer" id={task.id} defaultChecked={task.isChecked} />
@@ -91,9 +91,7 @@ export default async function ListPage({ params }: PageProps) {
                           <FieldTitle>{task.title}</FieldTitle>
                           <FieldDescription>{task.description}</FieldDescription>
                         </FieldContent>
-                        <Button variant={"outline"} size={"sm"}>
-                          Open
-                        </Button>
+                        <OpenTask task={task} />
                       </Field>
                     </div>
                   </FieldLabel>
