@@ -17,24 +17,32 @@ export default function SignInPage() {
   return (
     <div className="w-full flex justify-center pt-10">
       <Card className="w-full max-w-sm" suppressHydrationWarning>
+        {/* Header */}
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>Enter your username below to login to your activity</CardDescription>
-          <CardAction>
-            <Button variant={"link"} asChild>
-              <Link href={"/auth/register"}>Register</Link>
-            </Button>
-          </CardAction>
         </CardHeader>
+
+        {/* Content */}
         <CardContent>
           <LoginForm transitionFn={startLoading} />
         </CardContent>
+
+        {/* Footer */}
         <CardFooter className="flex-col gap-2">
           <Button type="submit" form="login-form" disabled={isLoading} className="w-full">
             {isLoading && <Spinner />}
             Login
           </Button>
           <GoogleSignInButton disabled={isLoading} />
+
+          {/* Register */}
+          <CardDescription className="space-x-1">
+            <span>Don't have an account?</span>
+            <Button variant={"link"} className="px-0" asChild>
+              <Link href={"/auth/register"}>Register</Link>
+            </Button>
+          </CardDescription>
         </CardFooter>
       </Card>
     </div>
