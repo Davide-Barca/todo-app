@@ -2,10 +2,10 @@
 
 import { getAuthenticatedUser } from "@/lib/auth/actions/get-user";
 import { selectAllListsByUserId } from "@/lib/database/query/select/select-lists";
-import { ListRow } from "@/lib/database/types/list";
+import { ListDTO } from "@/lib/database/types/list";
 import { redirect } from "next/navigation";
 
-export async function getAllLists(): Promise<ListRow[] | null> {
+export async function getAllLists(): Promise<ListDTO[] | null> {
   const user = await getAuthenticatedUser();
 
   if (!user) redirect("/signin");

@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
+import { useLoadingEffect } from "@/hooks/use-loading-effect";
 
 // Components
 import {
@@ -27,13 +28,12 @@ import Link from "next/link";
 import { getAllLists } from "@/actions/get/lists";
 
 // Types
-import { ListRow } from "@/lib/database/types/list";
-import { useLoadingEffect } from "@/hooks/use-loading-effect";
+import { DB } from "@/lib/database/db";
 
 // Main Component
 export default function MainSidebar() {
   // Load user lists
-  const { data: lists, isCompleted } = useLoadingEffect<ListRow[] | null>({ effect: getAllLists });
+  const { data: lists, isCompleted } = useLoadingEffect<DB["list"][] | null>({ effect: getAllLists });
 
   return (
     <Sidebar side="left" collapsible="icon">
@@ -94,9 +94,7 @@ export default function MainSidebar() {
               {isCompleted &&
                 lists &&
                 lists.length > 0 &&
-                lists.map(({ id, title }) => (
-                  <ListItem key={id} href={`/list/${id}`} name={title} activityCount={10} />
-                ))}
+                lists.map(({ id, title }) => <ListItem key={id} href={`/list/${id}`} name={title} />)}
               {isCompleted && (!lists || lists.length === 0) && <p>No lists available</p>}
             </SidebarMenu>
           </SidebarGroupContent>

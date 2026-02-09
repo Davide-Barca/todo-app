@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useTransition } from "react";
+import { useTransition } from "react";
 
 // Components
 import {
@@ -14,20 +14,19 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import TaskForm from "./form-task";
-import { Badge } from "../ui/badge";
 import { Spinner } from "../ui/spinner";
+import { DB } from "@/lib/database/db";
 
 // Custom Types
 type Task = {
   id: string;
   title: string;
   description: string;
-  isChecked: boolean;
 };
 
 type OpenTaskProps = {
   triggerValue?: string;
-  task: Task;
+  task: DB["task"];
 };
 
 // Main Component
@@ -47,14 +46,17 @@ export default function OpenTask({ triggerValue, task }: OpenTaskProps) {
         <DialogHeader>
           <DialogTitle className="space-x-2">
             <span>Task Overview</span>
-            <Badge variant={task.isChecked ? "default" : "secondary"}>{task.isChecked ? "Completed" : "Pending"}</Badge>
+            {/* <Badge variant={task.isChecked ? "default" : "secondary"}>{task.isChecked ? "Completed" : "Pending"}</Badge> */}
           </DialogTitle>
           <DialogDescription>Check details, status, and available actions for this task.</DialogDescription>
         </DialogHeader>
 
         {/* Form */}
         <div>
-          <TaskForm transitionFn={startLoading} defaultValues={{ title: task.title, description: task.description }} />
+          <TaskForm
+            transitionFn={startLoading}
+            defaultValues={{ title: task.title, description: task.description || "" }}
+          />
         </div>
 
         {/* Footer */}
