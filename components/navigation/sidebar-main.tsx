@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState, useTransition } from "react";
+import { ReactNode, useState } from "react";
 
 // Components
 import {
@@ -28,19 +28,12 @@ import { getAllLists } from "@/actions/get/lists";
 
 // Types
 import { ListRow } from "@/lib/database/types/list";
+import { useLoadingEffect } from "@/hooks/use-loading-effect";
 
 // Main Component
 export default function MainSidebar() {
-  const [isLoading, startLoading] = useTransition();
-  const [lists, setLists] = useState<ListRow[] | null>(null);
-
   // Load user lists
-  useEffect(() => {
-    startLoading(async () => {
-      const lists = await getAllLists();
-      setLists(lists);
-    });
-  }, []);
+  const { data: lists, isCompleted } = useLoadingEffect<ListRow[] | null>({ effect: getAllLists });
 
   return (
     <Sidebar side="left" collapsible="icon">
@@ -88,7 +81,7 @@ export default function MainSidebar() {
           <SidebarGroupContent>
             {/* Menu */}
             <SidebarMenu>
-              {!lists && (
+              {!isCompleted && (
                 <>
                   <SidebarMenuSkeleton />
                   <SidebarMenuSkeleton />
@@ -98,7 +91,13 @@ export default function MainSidebar() {
                   <SidebarMenuSkeleton />
                 </>
               )}
-              {!isLoading && lists && lists.map(({ id, title }) => <ListItem key={id} href={`/list/${id}`} name={title} activityCount={10} />)}
+              {isCompleted &&
+                lists &&
+                lists.length > 0 &&
+                lists.map(({ id, title }) => (
+                  <ListItem key={id} href={`/list/${id}`} name={title} activityCount={10} />
+                ))}
+              {isCompleted && (!lists || lists.length === 0) && <p>No lists available</p>}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
