@@ -10,6 +10,7 @@ import { TransitionStartFunction } from "react";
 import TextController from "@/components/utils/form-text-controller";
 import { showErrorToast } from "@/lib/toast";
 import TextareaController from "@/components/utils/form-textarea-controller";
+import { addUserTask } from "@/actions/post/task";
 
 // Types
 
@@ -43,17 +44,11 @@ export default function TaskNewForm({ formId, transitionFn }: LoginFormProps) {
   // Define onSubit function
   async function onSubmit(data: z.infer<typeof formSchema>) {
     transitionFn(async () => {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 5000);
-      });
+      const response = await addUserTask("56d289e0-7e34-44c2-baa3-c9378b6ad7c0", data.title, data.description);
 
-      const response = { ok: false, message: "" };
+      if (!response) return showErrorToast("Task Registration Failed!");
 
-      if (!response.ok) return showErrorToast("Task Registration Failed!", response.message);
-
-      router.push(callbackURL || "/");
+      router.push(`/list/56d289e0-7e34-44c2-baa3-c9378b6ad7c0`);
     });
   }
 

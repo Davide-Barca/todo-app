@@ -1,8 +1,7 @@
-import { db } from "../../db";
+import { DB, db } from "../../db";
 import { randomUUID } from "crypto";
-import { ListRow } from "../../types/list";
 
-export async function insertUserList(userId: string, title: string): Promise<ListRow> {
+export async function insertUserList(userId: string, title: string): Promise<DB["list"]> {
   const now = new Date().toISOString();
   const id = randomUUID();
 

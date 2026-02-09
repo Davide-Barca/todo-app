@@ -19,43 +19,6 @@ type PageProps = {
   params: Promise<PageParams>;
 };
 
-const list = {
-  id: "b3f2a1c4-9d87-4e12-a6b9-45f3c8a21d90",
-  name: "Attività Quotidiane",
-  tasks: [
-    {
-      id: "a12c9e44-7b5f-4a21-9f3a-1c2b9d8e0f45",
-      title: "Controllare le email",
-      description: "Leggere e rispondere alle email di lavoro e personali.",
-      isChecked: true,
-    },
-    {
-      id: "c45e7a91-2d8f-4f3b-9b72-0e1a6d4f8c23",
-      title: "Organizzare le attività",
-      description: "Pianificare le priorità della giornata e aggiornare la lista dei task.",
-      isChecked: false,
-    },
-    {
-      id: "f91d3b27-6a45-4c8e-b210-9d7a5e4f1c88",
-      title: "Fare una pausa",
-      description: "Prendere una pausa di 10 minuti per rilassarsi e ricaricare le energie.",
-      isChecked: false,
-    },
-    {
-      id: "7e5c2b19-3f84-4a90-8d65-1b2f9c6a4e33",
-      title: "Aggiornare il progetto",
-      description: "Rivedere lo stato del progetto e salvare le modifiche principali.",
-      isChecked: false,
-    },
-    {
-      id: "e8a4f6d2-91c3-4b57-9a10-5c2e7f8d3b44",
-      title: "Preparare il report",
-      description: "Scrivere un breve report sulle attività svolte oggi.",
-      isChecked: false,
-    },
-  ],
-};
-
 // Main Component
 export default async function ListPage({ params }: PageProps) {
   const { id } = await params;
@@ -95,7 +58,7 @@ export default async function ListPage({ params }: PageProps) {
                     <FieldLabel key={task.id} asChild>
                       <div>
                         <Field orientation={"horizontalCenter"}>
-                          <Checkbox className="size-5 cursor-pointer" id={task.id} defaultChecked={false} />
+                          <Checkbox className="size-5 cursor-pointer" id={task.id} defaultChecked={Boolean(task.isDone)} />
                           <FieldContent className="peer-has-data-checked:*:line-through peer-has-data-checked:*:opacity-50">
                             <FieldTitle>{task.title}</FieldTitle>
                             <FieldDescription>{task.description}</FieldDescription>
