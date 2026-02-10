@@ -25,7 +25,7 @@ import ChangeThemeIcon from "../utils/change-theme";
 import Link from "next/link";
 
 // Actions
-import { getAllLists } from "@/actions/get/lists";
+import { getUserLists } from "@/actions/get/lists";
 
 // Types
 import { DB } from "@/lib/database/db";
@@ -33,7 +33,7 @@ import { DB } from "@/lib/database/db";
 // Main Component
 export default function MainSidebar() {
   // Load user lists
-  const { data: lists, isCompleted } = useLoadingEffect<DB["list"][] | null>({ effect: getAllLists });
+  const { data: lists, isCompleted } = useLoadingEffect<DB["list"][] | null>({ effect: getUserLists });
 
   return (
     <Sidebar side="left" collapsible="icon">

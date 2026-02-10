@@ -1,11 +1,11 @@
 "use server";
 
 import { getAuthenticatedUser } from "@/lib/auth/actions/get-user";
+import { DB } from "@/lib/database/db";
 import { selectAllListsByUserId } from "@/lib/database/query/select/select-lists";
-import { ListDTO } from "@/lib/database/types/list";
 import { redirect } from "next/navigation";
 
-export async function getAllLists(): Promise<ListDTO[] | null> {
+export async function getUserLists(): Promise<DB["list"][] | null> {
   const user = await getAuthenticatedUser();
 
   if (!user) redirect("/signin");
@@ -16,5 +16,3 @@ export async function getAllLists(): Promise<ListDTO[] | null> {
 
   return lists;
 }
-
-export async function getUserLists() {}

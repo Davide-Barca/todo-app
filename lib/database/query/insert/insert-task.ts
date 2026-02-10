@@ -6,7 +6,7 @@ export async function insertUserTask(
   listId: string,
   taskTitle: string,
   taskDescription?: string,
-): Promise<DB["task"]> {
+): Promise<DB["task"] | null> {
   const now = new Date().toISOString();
   const id: string = randomUUID();
 
@@ -21,7 +21,10 @@ export async function insertUserTask(
     updatedAt: now,
   };
 
-  await db.insertInto("task").values(task).execute();
-
-  return task;
+  try {
+    await db.insertInto("task").values(task).execute();
+    return task;
+  } catch (error) {
+    return null;
+  }
 }
