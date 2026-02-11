@@ -16,6 +16,10 @@ import { Button } from "../ui/button";
 import TaskForm from "./form-task";
 import { Spinner } from "../ui/spinner";
 import { DB } from "@/lib/database/db";
+import { Trash } from "lucide-react";
+import { toast } from "sonner";
+import { deleteUserTaskAction } from "@/actions/delete/task";
+import { useRouter } from "next/navigation";
 
 // Custom Types
 type Task = {
@@ -31,7 +35,22 @@ type OpenTaskProps = {
 
 // Main Component
 export default function OpenTask({ triggerValue, task }: OpenTaskProps) {
+  const router = useRouter();
   const [isLoading, startLoading] = useTransition();
+  const [isDeleting, startDeleting] = useTransition();
+
+  function handleDelete() {
+    startDeleting(async () => {
+      const result = await deleteUserTaskAction(task.id);
+
+      if (!result) toast.error("Failed to delete task!");
+
+      if (result) {
+        toast.success("Task deleted successfully!");
+        router.push(`/list/${task.listId}`);
+      }
+    });
+  }
 
   return (
     <Dialog>
@@ -61,10 +80,16 @@ export default function OpenTask({ triggerValue, task }: OpenTaskProps) {
 
         {/* Footer */}
         <DialogFooter className="py-3" showCloseButton disableCloseButton={isLoading}>
-          <Button type="submit" form="task-form" size={"sm"} disabled={isLoading}>
-            {isLoading && <Spinner />}
-            Save
-          </Button>
+          <div className="w-full flex justify-between">
+            <Button onClick={handleDelete} variant={"destructive"} size={"sm"} disabled={isLoading}>
+              {isDeleting ? <Spinner /> : <Trash />}
+              {isDeleting ? "Deleting..." : "Delete"}
+            </Button>
+            <Button type="submit" form="task-form" size={"sm"} disabled={isLoading}>
+              {isLoading && <Spinner />}
+              Save
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
