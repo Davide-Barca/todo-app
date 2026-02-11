@@ -75,6 +75,8 @@ export default function OpenTask({ triggerValue, task }: OpenTaskProps) {
           <TaskForm
             transitionFn={startLoading}
             defaultValues={{ title: task.title, description: task.description || "" }}
+            listId={task.listId}
+            taskId={task.id}
           />
         </div>
 

@@ -2,7 +2,6 @@
 
 import { getAuthenticatedUser } from "@/lib/auth/actions/get-user";
 import { deleteUserTask } from "@/lib/database/query/delete/delete-task";
-import { DeleteResult } from "kysely";
 import { redirect } from "next/navigation";
 
 export async function deleteUserTaskAction(taskId: string): Promise<boolean | null> {

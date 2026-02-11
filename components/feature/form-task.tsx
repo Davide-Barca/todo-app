@@ -10,6 +10,9 @@ import { TransitionStartFunction } from "react";
 import TextController from "@/components/utils/form-text-controller";
 import { showErrorToast } from "@/lib/toast";
 import TextareaController from "@/components/utils/form-textarea-controller";
+import { updateUserTask } from "@/lib/database/query/update/update-task";
+import { toast } from "sonner";
+import { editUserTaskAction } from "@/actions/update/task";
 
 // Types
 
@@ -18,6 +21,8 @@ type LoginFormProps = {
   formId?: string;
   transitionFn: TransitionStartFunction;
   defaultValues?: z.infer<typeof formSchema>;
+  listId: string;
+  taskId: string;
 };
 
 // Form schema
@@ -27,7 +32,7 @@ const formSchema = z.object({
 });
 
 // Main Component
-export default function TaskForm({ formId, transitionFn, defaultValues }: LoginFormProps) {
+export default function TaskForm({ formId, transitionFn, defaultValues, listId, taskId }: LoginFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackURL = searchParams.get("callbackUrl") || "/";
@@ -44,17 +49,15 @@ export default function TaskForm({ formId, transitionFn, defaultValues }: LoginF
   // Define onSubit function
   async function onSubmit(data: z.infer<typeof formSchema>) {
     transitionFn(async () => {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 5000);
-      });
+      const result = await editUserTaskAction(listId, taskId, { title: data.title, description: data.description });
 
-      const response = { ok: false, message: "" };
+      if (!result) {
+        showErrorToast("Failed to update task. Please try again.");
+        return;
+      }
 
-      if (!response.ok) return showErrorToast("Task Registration Failed!", response.message);
-
-      router.push(callbackURL || "/");
+      toast.success("Task updated successfully!");
+      router.push(`/list/${listId}`);
     });
   }
 
