@@ -1,5 +1,6 @@
 // Components
 import { getListDataById } from "@/actions/get/list";
+import InputNewTask from "@/components/feature/input-new-task";
 import OpenTask from "@/components/feature/open-task";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
@@ -75,12 +76,7 @@ export default async function ListPage({ params }: PageProps) {
         </div>
 
         {/* Footer */}
-        <div className="w-full p-2 bg-accent border border-border rounded-full">
-          <div className="flex gap-2">
-            <Input className="bg-accent shadow-none border-0 rounded-full" placeholder="Type here..." />
-            <Button className="rounded-full">Add Task</Button>
-          </div>
-        </div>
+        <InputNewTask listId={list.id} />
       </div>
     </div>
   );
