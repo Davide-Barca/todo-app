@@ -7,6 +7,7 @@ import OpenTask from "./open-task";
 import { DB } from "@/lib/database/db";
 import { editUserTaskDoneAction } from "@/actions/update/task";
 import { showErrorToast, showInfoToast } from "@/lib/toast";
+import { useRouter } from "next/navigation";
 
 // Custom Types
 type ComponentProps = {
@@ -14,11 +15,13 @@ type ComponentProps = {
 };
 
 export default function TaskCard({ task }: ComponentProps) {
+  const router = useRouter();
+
   async function handleCheck(checked: boolean) {
     const result = await editUserTaskDoneAction(task.listId, task.id, checked);
     if (!result) showErrorToast("Failed to update task status. Please try again.");
 
-    showInfoToast("Task status updated");
+    router.refresh();
   }
 
   return (

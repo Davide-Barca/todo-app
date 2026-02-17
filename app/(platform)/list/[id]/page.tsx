@@ -53,7 +53,15 @@ export default async function ListPage({ params }: PageProps) {
             <FieldGroup className="gap-3">
               {tasks.length > 0 &&
                 tasks.map((task) => {
-                  return <TaskCard key={task.id} task={task} />;
+                  if (!task.isDone) {
+                    return <TaskCard key={task.id} task={task} />;
+                  }
+                })}
+              {tasks.length > 0 &&
+                tasks.map((task) => {
+                  if (task.isDone) {
+                    return <TaskCard key={task.id} task={task} />;
+                  }
                 })}
               {tasks.length === 0 && <FieldDescription className="text-center">No Tasks</FieldDescription>}
             </FieldGroup>
