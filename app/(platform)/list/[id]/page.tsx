@@ -1,12 +1,10 @@
 // Components
 import { getListDataById } from "@/actions/get/list";
 import InputNewTask from "@/components/feature/input-new-task";
-import OpenTask from "@/components/feature/open-task";
+import TaskCard from "@/components/feature/task-card";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldTitle } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { FieldDescription, FieldGroup } from "@/components/ui/field";
 import { Separator } from "@/components/ui/separator";
 import { List } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -55,20 +53,7 @@ export default async function ListPage({ params }: PageProps) {
             <FieldGroup className="gap-3">
               {tasks.length > 0 &&
                 tasks.map((task) => {
-                  return (
-                    <FieldLabel key={task.id} asChild>
-                      <div>
-                        <Field orientation={"horizontalCenter"}>
-                          <Checkbox className="size-5 cursor-pointer" id={task.id} defaultChecked={Boolean(task.isDone)} />
-                          <FieldContent className="peer-has-data-checked:*:line-through peer-has-data-checked:*:opacity-50">
-                            <FieldTitle>{task.title}</FieldTitle>
-                            <FieldDescription>{task.description}</FieldDescription>
-                          </FieldContent>
-                          <OpenTask task={task} />
-                        </Field>
-                      </div>
-                    </FieldLabel>
-                  );
+                  return <TaskCard key={task.id} task={task} />;
                 })}
               {tasks.length === 0 && <FieldDescription className="text-center">No Tasks</FieldDescription>}
             </FieldGroup>
