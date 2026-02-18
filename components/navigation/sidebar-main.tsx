@@ -29,6 +29,7 @@ import { getUserLists } from "@/actions/get/lists";
 
 // Types
 import { DB } from "@/lib/database/db";
+import ListMenu from "../feature/menu-list";
 
 // Main Component
 export default function MainSidebar() {
@@ -140,8 +141,8 @@ function ListItem({ href, name, activityCount, icon, noMenu = false }: ListItemP
       {hasBadge && <SidebarMenuBadge className="group-hover/menu-item:hidden">{activityCount}</SidebarMenuBadge>}
 
       {!noMenu && (
-        <SidebarMenuAction className="hidden group-hover/menu-item:flex">
-          <Ellipsis />
+        <SidebarMenuAction>
+          <ListMenu />
         </SidebarMenuAction>
       )}
     </SidebarMenuItem>
