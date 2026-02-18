@@ -40,9 +40,9 @@ export default async function ListPage({ params }: PageProps) {
               </Button>
               <span>{list.title}</span>
             </CardTitle>
-            <Button variant={"destructive"} size={"sm"}>
+            {/* <Button variant={"destructive"} size={"sm"}>
               Delete list
-            </Button>
+            </Button> */}
           </div>
           <Separator />
         </div>

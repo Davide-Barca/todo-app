@@ -95,7 +95,7 @@ export default function MainSidebar() {
               {isCompleted &&
                 lists &&
                 lists.length > 0 &&
-                lists.map(({ id, title }) => <ListItem key={id} href={`/list/${id}`} name={title} />)}
+                lists.map(({ id, title }) => <ListItem key={id} id={id} href={`/list/${id}`} name={title} />)}
               {isCompleted && (!lists || lists.length === 0) && <p>No lists available</p>}
             </SidebarMenu>
           </SidebarGroupContent>
@@ -118,15 +118,24 @@ export default function MainSidebar() {
 }
 
 // Unique Components
-type ListItemProps = {
+type BaseListItemProps = {
   href: string;
   name: string;
   activityCount?: number;
   icon?: ReactNode;
-  noMenu?: boolean;
 };
 
-function ListItem({ href, name, activityCount, icon, noMenu = false }: ListItemProps) {
+type ListItemProps =
+  | (BaseListItemProps & {
+      noMenu?: false;
+      id: string;
+    })
+  | (BaseListItemProps & {
+      noMenu: true;
+      id?: never;
+    });
+
+function ListItem({ id, href, name, activityCount, icon, noMenu = false }: ListItemProps) {
   let hasBadge = !!activityCount && activityCount > 0;
 
   return (
@@ -142,7 +151,7 @@ function ListItem({ href, name, activityCount, icon, noMenu = false }: ListItemP
 
       {!noMenu && (
         <SidebarMenuAction>
-          <ListMenu />
+          <ListMenu listId={id!} />
         </SidebarMenuAction>
       )}
     </SidebarMenuItem>
