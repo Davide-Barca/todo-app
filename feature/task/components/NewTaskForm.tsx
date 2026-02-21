@@ -59,6 +59,10 @@ export default function TaskNewForm({ formId, transitionFn }: LoginFormProps) {
     });
   }
 
+  if (isCompleted && (!lists || lists.length === 0)) {
+    router.push("/?create=list");
+  }
+
   // Build component
   return (
     <form id={formId || "new-task-form"} onSubmit={form.handleSubmit(onSubmit)} suppressHydrationWarning>

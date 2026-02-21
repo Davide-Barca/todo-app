@@ -36,8 +36,8 @@ export default async function MainSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarButton href="/?create=task" name="New Task" icon={<SquarePlus />} noMenu />
-              <SidebarButton href="/profile" name="Profile" icon={<User />} noMenu />
-              <SidebarButton href="/settings" name="Settings" icon={<Settings />} noMenu />
+              {/* <SidebarButton href="/profile" name="Profile" icon={<User />} noMenu />
+              <SidebarButton href="/settings" name="Settings" icon={<Settings />} noMenu /> */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
