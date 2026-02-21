@@ -1,4 +1,4 @@
-import { signOut } from "@/lib/auth/actions/signout";
+import { signOut } from "@/feature/auth/actions/signout";
 import { redirect } from "next/navigation";
 
 // Custom Types
@@ -6,5 +6,5 @@ import { redirect } from "next/navigation";
 export default async function SignoutPage() {
   await signOut();
 
-  redirect("/auth/signin");
+  redirect("/signin");
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { auth } from "..";
+import { auth } from "../../../lib/auth";
 
 type EmailSignInParams = {
   email: string;

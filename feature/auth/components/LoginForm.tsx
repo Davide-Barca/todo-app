@@ -7,7 +7,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { TransitionStartFunction } from "react";
 
 // Actions
-import { emailSignIn } from "@/lib/auth/actions/email-signin";
+import { emailSignIn } from "@/feature/auth/actions/email-signin";
 
 // Components
 import TextController from "@/components/form/TextController";

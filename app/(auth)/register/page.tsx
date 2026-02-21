@@ -38,7 +38,7 @@ export default function RegisterPage() {
           <CardDescription className="space-x-1">
             <span>Already have an account?</span>
             <Button variant={"link"} className="px-0" asChild>
-              <Link href={"/auth/signin"}>Signin</Link>
+              <Link href={"/signin"}>Signin</Link>
             </Button>
           </CardDescription>
         </CardFooter>

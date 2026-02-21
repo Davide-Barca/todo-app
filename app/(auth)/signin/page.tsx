@@ -40,7 +40,7 @@ export default function SignInPage() {
           <CardDescription className="space-x-1">
             <span>Don't have an account?</span>
             <Button variant={"link"} className="px-0" asChild>
-              <Link href={"/auth/register"}>Register</Link>
+              <Link href={"/register"}>Register</Link>
             </Button>
           </CardDescription>
         </CardFooter>

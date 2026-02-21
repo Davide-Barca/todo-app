@@ -6,7 +6,7 @@ import { Button, buttonVariants } from "../ui/button";
 import googleIcon from "@/media/googleIcon.svg";
 import { ButtonHTMLAttributes } from "react";
 import { VariantProps } from "class-variance-authority";
-import { GoogleSignIn } from "@/lib/auth/actions/google-signin";
+import { GoogleSignIn } from "@/feature/auth/actions/google-signin";
 import { useSearchParams } from "next/navigation";
 
 // Main Component

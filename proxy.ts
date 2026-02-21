@@ -3,7 +3,7 @@ import { auth } from "./lib/auth";
 import { headers } from "next/headers";
 
 function redirectToSignIn(req: NextRequest) {
-  const signInUrl = new URL("/auth/signin", req.url);
+  const signInUrl = new URL("/signin", req.url);
   signInUrl.searchParams.set("callbackUrl", req.nextUrl.pathname + req.nextUrl.search);
 
   return NextResponse.redirect(signInUrl);
@@ -18,7 +18,9 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/api/auth") ||
     pathname.startsWith("/api/health-check") ||
     pathname.startsWith("/favicon.ico") ||
-    pathname.startsWith("/auth") ||
+    pathname.startsWith("/signin") ||
+    pathname.startsWith("/register") ||
+    pathname.startsWith("/password-reset") ||
     pathname.startsWith("/public")
   ) {
     return NextResponse.next();

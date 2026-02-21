@@ -1,6 +1,6 @@
 "use server";
 
-import { getAuthenticatedUser } from "@/lib/auth/actions/get-user";
+import { getAuthenticatedUser } from "@/feature/auth/actions/get-user";
 import { deleteUserList } from "@/lib/database/query/delete/delete-list";
 import { redirect } from "next/navigation";
 

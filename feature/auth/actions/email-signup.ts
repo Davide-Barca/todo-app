@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "..";
+import { auth } from "../../../lib/auth";
 
 type EmailSignUpParams = {
   name: string;

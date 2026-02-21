@@ -1,6 +1,6 @@
 "use server";
 
-import { getAuthenticatedUser } from "@/lib/auth/actions/get-user";
+import { getAuthenticatedUser } from "@/feature/auth/actions/get-user";
 import { DB } from "@/lib/database/db";
 import { selectUserListWithTasksById } from "@/lib/database/query/select/select-list";
 import { selectAllListsByUserId } from "@/lib/database/query/select/select-lists";
