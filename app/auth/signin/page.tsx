@@ -5,9 +5,9 @@ import Link from "next/link";
 
 // Components
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import LoginForm from "@/components/feature/form-login";
-import GoogleSignInButton from "@/components/btn-google-signin";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import LoginForm from "@/feature/auth/components/LoginForm";
+import GoogleSignInButton from "@/components/utils/GoogleSignInButton";
 import { Spinner } from "@/components/ui/spinner";
 
 // Main Component

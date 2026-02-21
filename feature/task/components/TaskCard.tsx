@@ -1,19 +1,26 @@
 "use client";
 
 import React from "react";
-import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from "../ui/field";
-import { Checkbox } from "../ui/checkbox";
-import OpenTask from "./open-task";
-import { DB } from "@/lib/database/db";
-import { editUserTaskDoneAction } from "@/actions/update/task";
-import { showErrorToast, showInfoToast } from "@/lib/toast";
 import { useRouter } from "next/navigation";
+import { showErrorToast } from "@/lib/toast";
+
+// Components
+import { Field, FieldContent, FieldDescription, FieldLabel, FieldTitle } from "@/components/ui/field";
+import { Checkbox } from "@/components/ui/checkbox";
+import TaskDialog from "./TaskDialog";
+
+// Actions
+import { editUserTaskDoneAction } from "@/feature/task/actions/update";
+
+// Types
+import { DB } from "@/lib/database/db";
 
 // Custom Types
 type ComponentProps = {
   task: DB["task"];
 };
 
+// Main Component
 export default function TaskCard({ task }: ComponentProps) {
   const router = useRouter();
 
@@ -38,7 +45,7 @@ export default function TaskCard({ task }: ComponentProps) {
             <FieldTitle>{task.title}</FieldTitle>
             {task.description && <FieldDescription>{task.description}</FieldDescription>}
           </FieldContent>
-          <OpenTask task={task} />
+          <TaskDialog task={task} />
         </Field>
       </div>
     </FieldLabel>

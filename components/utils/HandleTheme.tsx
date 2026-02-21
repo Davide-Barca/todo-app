@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 
-export default function ChangeThemeIcon({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
+export default function HandleTheme({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
   const { setTheme, resolvedTheme } = useTheme();
   const [icon, setIcon] = useState<ReactNode | undefined>(undefined);
 

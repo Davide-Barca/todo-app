@@ -1,5 +1,5 @@
-import MainSidebar from "@/components/navigation/sidebar-main";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import MainSidebar from "@/components/navigation/MainSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function PlatformLayout({
   children,

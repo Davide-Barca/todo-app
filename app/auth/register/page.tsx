@@ -5,8 +5,8 @@ import Link from "next/link";
 
 // Components
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import RegisterForm from "@/components/feature/form-register";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import RegisterForm from "@/feature/auth/components/RegisterForm";
 import { Spinner } from "@/components/ui/spinner";
 
 // Main Component

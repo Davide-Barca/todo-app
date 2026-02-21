@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Button, buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "../ui/button";
 
 import googleIcon from "@/media/googleIcon.svg";
 import { ButtonHTMLAttributes } from "react";

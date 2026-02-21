@@ -1,13 +1,15 @@
+import React from "react";
+import { notFound } from "next/navigation";
+
 // Components
-import { getListDataById } from "@/actions/get/list";
-import InputNewTask from "@/components/feature/input-new-task";
-import TaskCard from "@/components/feature/task-card";
+import { getListDataById } from "@/feature/list/actions/get";
+import NewTaskInput from "@/feature/task/components/NewTaskInput";
+import TaskCard from "@/feature/task/components/TaskCard";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { FieldDescription, FieldGroup } from "@/components/ui/field";
 import { Separator } from "@/components/ui/separator";
 import { List } from "lucide-react";
-import { notFound } from "next/navigation";
 
 // Custom Types
 type PageParams = {
@@ -69,7 +71,7 @@ export default async function ListPage({ params }: PageProps) {
         </div>
 
         {/* Footer */}
-        <InputNewTask listId={list.id} />
+        <NewTaskInput listId={list.id} />
       </div>
     </div>
   );

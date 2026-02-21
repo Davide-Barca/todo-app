@@ -1,5 +1,5 @@
 // Components
-import PasswordResetForm from "@/components/feature/form-password-reset";
+import PasswordResetForm from "@/feature/auth/components/PasswordResetForm";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 

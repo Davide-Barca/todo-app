@@ -8,8 +8,8 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { deleteUserListAction } from "@/actions/delete/list";
+} from "@/components/ui/dropdown-menu";
+import { deleteUserListAction } from "../actions/delete";
 import { useRouter } from "next/navigation";
 
 export default function ListMenu({ listId }: { listId: string }) {

@@ -10,7 +10,7 @@ import { TransitionStartFunction } from "react";
 import { emailSignIn } from "@/lib/auth/actions/email-signin";
 
 // Components
-import TextController from "../utils/form-text-controller";
+import TextController from "@/components/form/TextController";
 import { showErrorToast } from "@/lib/toast";
 
 // Types

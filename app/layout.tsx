@@ -4,7 +4,7 @@ import { fontsClasses } from "@/lib/fonts";
 
 // Components
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/feature/theme-provider";
+import { ThemeProvider } from "@/components/utils/ThemeProvider";
 
 // Metadata
 export const metadata: Metadata = {

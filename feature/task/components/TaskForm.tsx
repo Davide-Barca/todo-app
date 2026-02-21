@@ -7,12 +7,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { TransitionStartFunction } from "react";
 
 // Components
-import TextController from "@/components/utils/form-text-controller";
+import TextController from "@/components/form/TextController";
 import { showErrorToast } from "@/lib/toast";
-import TextareaController from "@/components/utils/form-textarea-controller";
+import TextareaController from "@/components/form/TextareaController";
 import { updateUserTask } from "@/lib/database/query/update/update-task";
 import { toast } from "sonner";
-import { editUserTaskAction } from "@/actions/update/task";
+import { editUserTaskAction } from "@/feature/task/actions/update";
 
 // Types
 

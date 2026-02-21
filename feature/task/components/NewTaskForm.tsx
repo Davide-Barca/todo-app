@@ -8,13 +8,13 @@ import { TransitionStartFunction } from "react";
 import { useLoadingEffect } from "@/hooks/use-loading-effect";
 
 // Components
-import TextController from "@/components/utils/form-text-controller";
+import TextController from "@/components/form/TextController";
 import { showErrorToast } from "@/lib/toast";
-import TextareaController from "@/components/utils/form-textarea-controller";
-import { addUserTask } from "@/actions/post/task";
-import SelectController from "../utils/form-select-controller";
-import { getUserLists } from "@/actions/get/lists";
-import { Skeleton } from "../ui/skeleton";
+import TextareaController from "@/components/form/TextareaController";
+import { addUserTask } from "@/feature/task/actions/add";
+import SelectController from "@/components/form/SelectController";
+import { getUserLists } from "@/feature/list/actions/get";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Types
 

@@ -5,18 +5,10 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 // Components
-import NewListForm from "@/components/feature/form-new-list";
-import NewTaskForm from "@/components/feature/form-new-task";
+import NewListForm from "@/feature/list/components/NewListForm";
+import NewTaskForm from "@/feature/task/components/NewTaskForm";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 
 // Custom Types

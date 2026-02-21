@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 // Actions
 
 // Components
-import TextController from "../utils/form-text-controller";
+import TextController from "@/components/form/TextController";
 import { showInfoToast } from "@/lib/toast";
 
 // Types

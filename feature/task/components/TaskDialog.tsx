@@ -1,6 +1,8 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // Components
 import {
@@ -11,15 +13,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
-import TaskForm from "./form-task";
-import { Spinner } from "../ui/spinner";
-import { DB } from "@/lib/database/db";
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import TaskForm from "./TaskForm";
+import { Spinner } from "@/components/ui/spinner";
 import { Trash } from "lucide-react";
-import { toast } from "sonner";
-import { deleteUserTaskAction } from "@/actions/delete/task";
-import { useRouter } from "next/navigation";
+
+// Actions
+import { deleteUserTaskAction } from "@/feature/task/actions/delete";
+
+// Types
+import { DB } from "@/lib/database/db";
 
 // Custom Types
 type Task = {
@@ -34,7 +38,7 @@ type OpenTaskProps = {
 };
 
 // Main Component
-export default function OpenTask({ triggerValue, task }: OpenTaskProps) {
+export default function TaskDialog({ triggerValue, task }: OpenTaskProps) {
   const router = useRouter();
   const [isLoading, startLoading] = useTransition();
   const [isDeleting, startDeleting] = useTransition();

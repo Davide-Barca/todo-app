@@ -7,9 +7,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { TransitionStartFunction } from "react";
 
 // Components
-import TextController from "../utils/form-text-controller";
+import TextController from "@/components/form/TextController";
 import { showErrorToast } from "@/lib/toast";
-import { addUserList } from "@/actions/post/list";
+import { addUserList } from "../actions/add";
 
 // Types
 

@@ -20,16 +20,16 @@ import {
   SidebarMenuItem,
   SidebarMenuSkeleton,
 } from "../ui/sidebar";
-import { Ellipsis, LogOut, Plus, Settings, SquarePlus, User } from "lucide-react";
-import ChangeThemeIcon from "../utils/change-theme";
+import { LogOut, Plus, Settings, SquarePlus, User } from "lucide-react";
+import ChangeThemeIcon from "../utils/HandleTheme";
 import Link from "next/link";
 
 // Actions
-import { getUserLists } from "@/actions/get/lists";
+import { getUserLists } from "@/feature/list/actions/get";
 
 // Types
 import { DB } from "@/lib/database/db";
-import ListMenu from "../feature/menu-list";
+import ListSidebarMenu from "@/feature/list/components/ListSidebarMenu";
 
 // Main Component
 export default function MainSidebar() {
@@ -151,7 +151,7 @@ function ListItem({ id, href, name, activityCount, icon, noMenu = false }: ListI
 
       {!noMenu && (
         <SidebarMenuAction>
-          <ListMenu listId={id!} />
+          <ListSidebarMenu listId={id!} />
         </SidebarMenuAction>
       )}
     </SidebarMenuItem>

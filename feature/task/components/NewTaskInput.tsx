@@ -8,10 +8,10 @@ import { useTransition } from "react";
 
 // Components
 import { showErrorToast } from "@/lib/toast";
-import { addUserTask } from "@/actions/post/task";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Spinner } from "../ui/spinner";
+import { addUserTask } from "@/feature/task/actions/add";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 // Types
 

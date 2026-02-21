@@ -1,8 +1,8 @@
 import React from "react";
 
 // Components
-import { Field, FieldContent, FieldLabel } from "../ui/field";
-import { Skeleton } from "../ui/skeleton";
+import { Field, FieldContent, FieldLabel } from "../components/ui/field";
+import { Skeleton } from "../components/ui/skeleton";
 
 // Main Component
 export default function TaskSkeleton() {
