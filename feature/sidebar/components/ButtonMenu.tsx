@@ -9,15 +9,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { deleteUserListAction } from "../actions/delete";
+import { deleteUserListAction } from "@/feature/list/actions/delete";
 import { useRouter } from "next/navigation";
 
-export default function ListMenu({ listId }: { listId: string }) {
+export default function ButtonMenu({ listId }: { listId: string }) {
   const router = useRouter();
 
   async function handleDelete() {
     await deleteUserListAction(listId);
 
+    router.refresh();
     router.push("/?create=list");
   }
 
